@@ -1,5 +1,7 @@
 js/bootstrap
 js/jquery
 js/knockout
+js/lodash
+js/requirejs
 /nbproject/private/
 nbproject
