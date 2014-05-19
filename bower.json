@@ -1,0 +1,25 @@
+{
+  "name": "rudi-bieller-knockout",
+  "version": "0.0.1",
+  "homepage": "https://github.com/invalidargument/rudiknockout",
+  "authors": [
+    "invalidargument <verstaerker@gmx.net>"
+  ],
+  "description": "Rudi Bieller mit Knockout",
+  "main": "css/main.css",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "knockout": "~3.1.0"
+  }
+}
