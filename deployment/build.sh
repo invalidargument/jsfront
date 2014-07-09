@@ -1,6 +1,8 @@
 #!/bin/bash
-echo -e "########### Start build ###########\n"
-grunt
-echo -e "Uglify and pack local javascript...\n"
+echo "########### Start build ###########"
+echo "Uglify and pack local javascript..."
 node deployment/r.js -o js/rudibieller/build.js
-echo -e "########### Build done ###########\n"
+grunt
+echo "Build project, copy all prepared files to build directory..."
+echo "Build project, set paths and variables..."
+echo "########### Build done ###########"
