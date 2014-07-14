@@ -1,10 +1,16 @@
 module.exports = function(grunt) {
+  var environment = 'dev';
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json')
   });
   
   grunt.registerTask('default', 'Deploy project.', function() {
-      grunt.log.write('Build, deploy...');
+      if (typeof grunt.option('env') !== 'undefined' 
+          && (grunt.option('env') === 'live' || grunt.option('env') === 'dev')) {
+          environment = grunt.option('env');
+      }
+      grunt.log.write('Build, deploy ' + environment + ' environment...' + "\n");
       grunt.task.run('clean');
       grunt.task.run('build');
   });
