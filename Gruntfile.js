@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
   var environment = 'dev';
+  var buildDir = 'build/';
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json')
@@ -11,38 +12,45 @@ module.exports = function(grunt) {
           && (grunt.option('env') === 'live' || grunt.option('env') === 'dev')) {
           environment = grunt.option('env');
       }
-      grunt.log.write('Build, deploy ' + environment + ' environment...' + "\n");
+      grunt.log.write('Since this is a JS playground, let\s start a JS build! Environment is set to ' + environment + '. ').ok();
       grunt.task.run('clean');
-      grunt.task.run('build');
+      grunt.task.run('copyJs');
+      grunt.task.run('copyCss');
       grunt.task.run('setPaths');
   });
   
   grunt.registerTask('clean', 'Clean build directory.', function() {
-      grunt.file.expand({}, ['build/*']).forEach(function(path) {
-          grunt.log.write('Deleting ' + path).ok();
+      grunt.file.expand({}, [buildDir + '*']).forEach(function(path) {
           grunt.file.delete(path);
       });
+      grunt.log.ok();
   });
   
-  grunt.registerTask('build', 'Build for Deployment.', function() {
+  grunt.registerTask('copyJs', 'Copy all relevant JS files.', function() {
       var sourceDir = 'js/rudibieller/';
+      var targetDir = buildDir + 'js/';
       
       grunt.file.copy('js/jquery/dist/jquery.min.js', sourceDir + 'lib/jquery.js');
       grunt.file.copy('js/knockout/dist/knockout.js', sourceDir + 'lib/knockout.js');
       grunt.file.copy('js/lodash/dist/lodash.min.js', sourceDir + 'lib/lodash.js');
       grunt.file.copy('js/requirejs/require.js', sourceDir + 'lib/require.js');
       
-      grunt.file.mkdir('build/js/lib');
-      grunt.log.write('Copying index.html').ok();
-      grunt.file.copy('index.html', 'build/index.html');
-      grunt.log.write('Copying js/rudibieller/main-built.js').ok();
-      grunt.file.copy(sourceDir + 'main-built.js', 'build/js/rudibieller.js');
+      grunt.file.mkdir(targetDir + 'lib');
+      grunt.file.copy('index.html', buildDir + 'index.html');
+      grunt.file.copy(sourceDir + 'main-built.js', targetDir + 'rudibieller.js');
       
-      grunt.file.expand({}, ['js/rudibieller/lib/*']).forEach(function(path) {
-          grunt.log.write('Copying ' + path).ok();
+      grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
           var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */
-          grunt.file.copy(path, 'build/js/lib/' + filename);
+          grunt.file.copy(path, targetDir + 'lib/' + filename);
       });
+      grunt.log.ok();
+  });
+  
+  grunt.registerTask('copyCss', 'Copy all relevant CSS files.', function() {
+      /* minify css to be done.. */
+      grunt.file.mkdir(buildDir + 'css');
+      grunt.file.copy('css/rudibieller.css', 'build/css/rudibieller.css');
+      grunt.log.ok();
   });
   
   grunt.registerTask('setPaths', 'set paths for given environment.', function() {
