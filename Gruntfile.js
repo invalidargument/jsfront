@@ -6,6 +6,7 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('default', 'Deploy project.', function() {
+      /* there is only dev and live here. */
       if (typeof grunt.option('env') !== 'undefined' 
           && (grunt.option('env') === 'live' || grunt.option('env') === 'dev')) {
           environment = grunt.option('env');
@@ -13,6 +14,7 @@ module.exports = function(grunt) {
       grunt.log.write('Build, deploy ' + environment + ' environment...' + "\n");
       grunt.task.run('clean');
       grunt.task.run('build');
+      grunt.task.run('setPaths');
   });
   
   grunt.registerTask('clean', 'Clean build directory.', function() {
@@ -41,5 +43,13 @@ module.exports = function(grunt) {
           var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */
           grunt.file.copy(path, 'build/js/lib/' + filename);
       });
+  });
+  
+  grunt.registerTask('setPaths', 'set paths for given environment.', function() {
+      if (environment === 'live') {
+          grunt.log.write('Setting paths for environment live.').ok();
+      } else {
+          grunt.log.write('Nothing to replace.').ok();
+      }
   });
 };
