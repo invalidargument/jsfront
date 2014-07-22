@@ -38,7 +38,7 @@ module.exports = function(grunt) {
       
       grunt.file.mkdir(targetDir + 'lib');
       grunt.file.copy('index.html', buildDir + 'index.html');
-      grunt.file.copy(sourceDir + 'Main-min.js', targetDir + 'rudibieller.js');
+      grunt.file.copy(sourceDir + 'Main.min.js', targetDir + 'rudibieller.js');
       
       grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
           var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */
@@ -49,8 +49,11 @@ module.exports = function(grunt) {
   
   grunt.registerTask('copyCss', 'Copy all relevant CSS files.', function() {
       /* minify css to be done.. */
+      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
+      
       grunt.file.mkdir(buildDir + 'css');
       grunt.file.copy('css/rudibieller.css', 'build/css/rudibieller.css');
+      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'build/css/bootstrap.css');
       grunt.log.ok();
   });
   
