@@ -27,17 +27,18 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('copyJs', 'Copy all relevant JS files.', function() {
-      var sourceDir = 'js/rudibieller/';
+      var sourceDir = 'js/';
       var targetDir = buildDir + 'js/';
       
-      grunt.file.copy('js/jquery/dist/jquery.min.js', sourceDir + 'lib/jquery.js');
-      grunt.file.copy('js/knockout/dist/knockout.js', sourceDir + 'lib/knockout.js');
-      grunt.file.copy('js/lodash/dist/lodash.min.js', sourceDir + 'lib/lodash.js');
-      grunt.file.copy('js/requirejs/require.js', sourceDir + 'lib/require.js');
+      grunt.file.copy(sourceDir + 'jquery/dist/jquery.min.js', sourceDir + 'lib/jquery.js');
+      grunt.file.copy(sourceDir + 'knockout/dist/knockout.js', sourceDir + 'lib/knockout.js');
+      grunt.file.copy(sourceDir + 'lodash/dist/lodash.min.js', sourceDir + 'lib/lodash.js');
+      grunt.file.copy(sourceDir + 'requirejs/require.js', sourceDir + 'lib/require.js');
+      grunt.file.copy(sourceDir + 'bootstrap/dist/js/bootstrap.min.js', sourceDir + 'lib/bootstrap.js');
       
       grunt.file.mkdir(targetDir + 'lib');
       grunt.file.copy('index.html', buildDir + 'index.html');
-      grunt.file.copy(sourceDir + 'main-built.js', targetDir + 'rudibieller.js');
+      grunt.file.copy(sourceDir + 'Main-min.js', targetDir + 'rudibieller.js');
       
       grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
           var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */
