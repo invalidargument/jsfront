@@ -5,3 +5,7 @@ js/lodash
 js/requirejs
 /nbproject/private/
 nbproject
+js/Main.min.js
+build/css/
+build/js/
+build/index.html
