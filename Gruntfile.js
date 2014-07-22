@@ -20,7 +20,11 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('clean', 'Clean build directory.', function() {
-      grunt.file.expand({}, [buildDir + '*']).forEach(function(path) {
+      var deletePattern = [
+          buildDir + '*',
+          '!' + buildDir + 'README'
+      ];
+      grunt.file.expand({}, deletePattern).forEach(function(path) {
           grunt.file.delete(path);
       });
       grunt.log.ok();
@@ -52,8 +56,8 @@ module.exports = function(grunt) {
       grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
       
       grunt.file.mkdir(buildDir + 'css');
-      grunt.file.copy('css/rudibieller.css', 'build/css/rudibieller.css');
-      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'build/css/bootstrap.css');
+      grunt.file.copy('css/rudibieller.css', buildDir + '/css/rudibieller.css');
+      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
       grunt.log.ok();
   });
   
