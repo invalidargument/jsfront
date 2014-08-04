@@ -1,7 +1,8 @@
 ({
     baseUrl: ".",
     paths: {
-        //jquery: "some/other/jquery"
+        knockout: 'lib/knockout',
+        lodash: 'lib/lodash'
     },
     name: "Main",
     out: "Main.min.js"

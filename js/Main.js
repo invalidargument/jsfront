@@ -1,5 +1,6 @@
-define(['Config/Config'], function() {
+define(['knockout', 'Communication/Email/ViewModel', 'Config/Config'], function(ko, MailVM) {
+    ko.applyBindings(new MailVM());
     var foo = function () {
-        console.log('foo');
+        console.log('Here we go.');
     }();
 });

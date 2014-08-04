@@ -19,21 +19,64 @@
             <div class="site-wrapper-inner">
                 <div class="content-container">
                     <div class="inner">
+                        
                         <h1>Rudi Bieller</h1>
                         <p class="lead">Ein Spielplatz, sonst nichts.</p>
+
+                        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="post" action="/" data-bind="submit: sendForm" class="form-horizontal">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="contactModalLabel">Schreib mir!</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                            <fieldset>
+                                                <legend>Kontaktformular</legend>
+                                                <input type="text" name="name" accesskey="n" placeholder="Dein Name" autofocus data-bind="value:name">
+                                                <input type="email" name="email" accesskey="e" placeholder="Deine E-Mail" data-bind="value:email">
+                                                <textarea name="message" rows="5" cols="80" accesskey="m" placeholder="Deine Nachricht" data-bind="value:message"></textarea>
+                                            </fieldset>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <span class="error-hidden"></span>
+                                        <button name="send" type="submit" class="btn btn-primary" accesskey="s">Abschicken</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer">
-            <div class="container">
+            <div class="container linklist">
                 <p>
-                    Formales Buzzwording bei <a href="https://www.xing.com/profile/Rudi_Bieller" title="Formales Buzzwording bei XING">XING</a>, 
-                    Quellcode bei <a href="https://github.com/invalidargument/rudiknockout" title="Quellcode dieser Seite auf GitHub°">GitHub</a>.
+                    <span>Formales Buzzwording bei <a href="https://www.xing.com/profile/Rudi_Bieller" title="Formales Buzzwording bei XING">XING</a>,</span>
+                    <span>Quellcode bei <a href="https://github.com/invalidargument/rudiknockout" title="Quellcode dieser Seite auf GitHub">GitHub</a>.</span>
+                    <span>Kontakt? <a href="" title="" data-toggle="modal" data-target="#contactModal">Schreib mir!</a></span>
                 </p>
             </div>
         </div>
+        <script src="js/lib/require.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="js/lib/bootstrap.js"></script>
+        <script type="text/javascript">
+            require.config({
+                baseUrl: "./js",
+                paths: {
+                    knockout: 'lib/knockout',
+                    lodash: 'lib/lodash'
+                }
+            });
+        
+            require(['Main'], function() {
+            });
+        </script>
     </body>
 </html>
