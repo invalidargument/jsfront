@@ -1,22 +1,15 @@
 module.exports = function(grunt) {
-  var environment = 'dev';
   var buildDir = 'build/';
   
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json')
+      pkg: grunt.file.readJSON('package.json')
   });
   
   grunt.registerTask('default', 'Deploy project.', function() {
-      /* there is only dev and live here. */
-      if (typeof grunt.option('env') !== 'undefined' 
-          && (grunt.option('env') === 'live' || grunt.option('env') === 'dev')) {
-          environment = grunt.option('env');
-      }
-      grunt.log.write('Since this is a JS playground, let\s start a JS build! Environment is set to ' + environment + '. ').ok();
+      grunt.log.write('Since this is a JS playground, let\s do a JS build!').ok();
       grunt.task.run('clean');
       grunt.task.run('copyJs');
       grunt.task.run('copyCss');
-      grunt.task.run('setPaths');
   });
   
   grunt.registerTask('clean', 'Clean build directory.', function() {
@@ -59,13 +52,5 @@ module.exports = function(grunt) {
       grunt.file.copy('css/rudibieller.css', buildDir + '/css/rudibieller.css');
       grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
       grunt.log.ok();
-  });
-  
-  grunt.registerTask('setPaths', 'set paths for given environment.', function() {
-      if (environment === 'live') {
-          grunt.log.write('Setting paths for environment live.').ok();
-      } else {
-          grunt.log.write('Nothing to replace.').ok();
-      }
   });
 };
