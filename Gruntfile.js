@@ -1,9 +1,27 @@
 module.exports = function(grunt) {
   var buildDir = 'build/';
+  var replacements = {
+      uri: 'http://localhost:8888/rudi-bieller-symfony/Symfony/web/app_dev.php/kontakt'
+  };
+  if (typeof grunt.option('env') !== 'undefined' && grunt.option('env') === 'live') {
+      replacements.uri = '/kontakt';
+  }
   
   grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json')
+        pkg: grunt.file.readJSON('package.json'),
+        replace: {
+            example: {
+                src: ['js/Config/Config_template.js'],
+                dest: 'js/Config/Config.js',
+                replacements: [{
+                    from: '{{uri}}',
+                    to: replacements.uri
+                }]
+          }
+        }
   });
+  
+  grunt.loadNpmTasks('grunt-text-replace');
   
   grunt.registerTask('default', 'Deploy project.', function() {
       grunt.log.write('Since this is a JS playground, let\s do a JS build!').ok();
