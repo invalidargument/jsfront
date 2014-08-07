@@ -101,6 +101,7 @@ input, textarea {
 
 .linklist span {
     padding:0 4px;
+    white-space:nowrap;
 }
 
 .modal-header,

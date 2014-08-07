@@ -2,11 +2,11 @@ module.exports = function(grunt) {
   var buildDir = 'build/';
   var replacements = {
       uri: 'http://localhost:8888/rudi-bieller-symfony/Symfony/web/app_dev.php/kontakt',
-      jsFilename: 'Main'
+      jsModuleName: 'Rudibieller'
   };
   if (typeof grunt.option('env') !== 'undefined' && grunt.option('env') === 'live') {
       replacements.uri = '/kontakt';
-      replacements.jsFilename = 'rudibieller';
+      replacements.jsModuleName = 'Rudibieller';
   }
   
   grunt.initConfig({
@@ -19,14 +19,13 @@ module.exports = function(grunt) {
                     from: '{{uri}}',
                     to: replacements.uri
                 }]
-                // TODO: index.html im require -> Main.js in rudibieller.js umwandeln
             },
             IndexHtml: {
                 src: ['index_template.html'],
                 dest: 'index.html',
                 replacements: [{
                     from: '{{jsname}}',
-                    to: replacements.jsFilename
+                    to: replacements.jsModuleName
                 }]
             }
         }
@@ -64,7 +63,7 @@ module.exports = function(grunt) {
       
       grunt.file.mkdir(targetDir + 'lib');
       grunt.file.copy('index.html', buildDir + 'index.html');
-      grunt.file.copy(sourceDir + 'Main.min.js', targetDir + 'rudibieller.js');
+      grunt.file.copy(sourceDir + 'Rudibieller.min.js', targetDir + 'Rudibieller.js');
       
       grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
           var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */

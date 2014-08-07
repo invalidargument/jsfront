@@ -4,6 +4,6 @@
         knockout: 'lib/knockout',
         lodash: 'lib/lodash'
     },
-    name: "Main",
-    out: "Main.min.js"
+    name: "Rudibieller",
+    out: "Rudibieller.min.js"
 })
