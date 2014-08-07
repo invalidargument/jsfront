@@ -9,3 +9,5 @@ js/Main.min.js
 build/css/
 build/js/
 build/index.html
+index.html
+js/Config/Config.js

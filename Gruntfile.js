@@ -1,23 +1,34 @@
 module.exports = function(grunt) {
   var buildDir = 'build/';
   var replacements = {
-      uri: 'http://localhost:8888/rudi-bieller-symfony/Symfony/web/app_dev.php/kontakt'
+      uri: 'http://localhost:8888/rudi-bieller-symfony/Symfony/web/app_dev.php/kontakt',
+      jsFilename: 'Main'
   };
   if (typeof grunt.option('env') !== 'undefined' && grunt.option('env') === 'live') {
       replacements.uri = '/kontakt';
+      replacements.jsFilename = 'rudibieller';
   }
   
   grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         replace: {
-            example: {
+            ConfigJs: {
                 src: ['js/Config/Config_template.js'],
                 dest: 'js/Config/Config.js',
                 replacements: [{
                     from: '{{uri}}',
                     to: replacements.uri
                 }]
-          }
+                // TODO: index.html im require -> Main.js in rudibieller.js umwandeln
+            },
+            IndexHtml: {
+                src: ['index_template.html'],
+                dest: 'index.html',
+                replacements: [{
+                    from: '{{jsname}}',
+                    to: replacements.jsFilename
+                }]
+            }
         }
   });
   

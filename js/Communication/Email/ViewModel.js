@@ -18,7 +18,7 @@ define(['knockout'], function(ko) {
                     this.message('');
                 }, this)
             ).done(function(e) {
-                console.log('done', e);
+                $('#contactModal').modal('hide');
             }).fail(function(e) {
                 var el = $('.modal-footer .error-hidden');
                 el.text(Config.messages.error.standard).addClass('error-visible');
