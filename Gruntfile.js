@@ -1,16 +1,18 @@
 module.exports = function(grunt) {
-  var buildDir = 'build/';
-  var replacements = {
-      uri: 'http://localhost:8888/rudi-bieller-symfony/Symfony/web/app_dev.php/kontakt',
-      jsModuleName: 'Rudibieller'
-  };
-  if (typeof grunt.option('env') !== 'undefined' && grunt.option('env') === 'live') {
-      replacements.uri = '/kontakt';
-      replacements.jsModuleName = 'Rudibieller';
-  }
+    /* needs somethings */
+    var buildDir = 'build/';
+    var replacements = {
+        uri: 'http://localhost:8888/rudi-bieller-symfony/Symfony/web/app_dev.php/kontakt',
+        jsModuleName: 'Rudibieller'
+    };
+    if (typeof grunt.option('env') !== 'undefined' && grunt.option('env') === 'live') {
+        replacements.uri = '/kontakt';
+        replacements.jsModuleName = 'Rudibieller';
+    }
   
-  grunt.initConfig({
+    grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        /* string replace */
         replace: {
             ConfigJs: {
                 src: ['js/Config/Config_template.js'],
@@ -28,16 +30,53 @@ module.exports = function(grunt) {
                     to: replacements.jsModuleName
                 }]
             }
+        },
+        /* css shrinking with grunt-cssshrink */
+//        cssshrink: {
+//            options: {
+//                log: false
+//            },
+//            rudibiellerJs: {
+//                files: {
+//                    'build/css': ['css/rudibieller.css'] /* src : dest */
+//                }
+//            }
+//        },
+        /* css shrinking with grunt-cssshrink */
+        cssmin: {
+            combine: {
+                files: {
+                    'build/css/rudibieller.css': ['css/rudibieller.css'] /* src : dest */
+              }
+            }
+        },
+        /* html shrinking */
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    minifyJS: true
+                },
+                files: {
+                    'build/index.html': 'index.html' /* src : dest */
+                }
+            },
         }
   });
   
   grunt.loadNpmTasks('grunt-text-replace');
+//  grunt.loadNpmTasks('grunt-cssshrink');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   
   grunt.registerTask('default', 'Deploy project.', function() {
       grunt.log.write('Since this is a JS playground, let\s do a JS build!').ok();
       grunt.task.run('clean');
       grunt.task.run('copyJs');
+      grunt.task.run('cssmin');
       grunt.task.run('copyCss');
+      grunt.task.run('htmlmin');
   });
   
   grunt.registerTask('clean', 'Clean build directory.', function() {
@@ -62,7 +101,7 @@ module.exports = function(grunt) {
       grunt.file.copy(sourceDir + 'bootstrap/dist/js/bootstrap.min.js', sourceDir + 'lib/bootstrap.js');
       
       grunt.file.mkdir(targetDir + 'lib');
-      grunt.file.copy('index.html', buildDir + 'index.html');
+//      grunt.file.copy('index.html', buildDir + 'index.html');
       grunt.file.copy(sourceDir + 'Rudibieller.min.js', targetDir + 'Rudibieller.js');
       
       grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
@@ -77,7 +116,7 @@ module.exports = function(grunt) {
       grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
       
       grunt.file.mkdir(buildDir + 'css');
-      grunt.file.copy('css/rudibieller.css', buildDir + '/css/rudibieller.css');
+      //grunt.file.copy('css/rudibieller.css', buildDir + '/css/rudibieller.css'); // done by shrinker
       grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
       grunt.log.ok();
   });
