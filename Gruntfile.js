@@ -32,17 +32,6 @@ module.exports = function(grunt) {
             }
         },
         /* css shrinking with grunt-cssshrink */
-//        cssshrink: {
-//            options: {
-//                log: false
-//            },
-//            rudibiellerJs: {
-//                files: {
-//                    'build/css': ['css/rudibieller.css'] /* src : dest */
-//                }
-//            }
-//        },
-        /* css shrinking with grunt-cssshrink */
         cssmin: {
             combine: {
                 files: {
@@ -50,7 +39,7 @@ module.exports = function(grunt) {
               }
             }
         },
-        /* html shrinking */
+        /* html shrinking with grunt-contrib-htmlmin */
         htmlmin: {
             dist: {
                 options: {
@@ -66,7 +55,6 @@ module.exports = function(grunt) {
   });
   
   grunt.loadNpmTasks('grunt-text-replace');
-//  grunt.loadNpmTasks('grunt-cssshrink');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   
@@ -101,7 +89,6 @@ module.exports = function(grunt) {
       grunt.file.copy(sourceDir + 'bootstrap/dist/js/bootstrap.min.js', sourceDir + 'lib/bootstrap.js');
       
       grunt.file.mkdir(targetDir + 'lib');
-//      grunt.file.copy('index.html', buildDir + 'index.html');
       grunt.file.copy(sourceDir + 'Rudibieller.min.js', targetDir + 'Rudibieller.js');
       
       grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
@@ -112,11 +99,8 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('copyCss', 'Copy all relevant CSS files.', function() {
-      /* minify css to be done.. */
       grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
-      
       grunt.file.mkdir(buildDir + 'css');
-      //grunt.file.copy('css/rudibieller.css', buildDir + '/css/rudibieller.css'); // done by shrinker
       grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
       grunt.log.ok();
   });
