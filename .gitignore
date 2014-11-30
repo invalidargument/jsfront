@@ -3,6 +3,7 @@ js/jquery
 js/knockout
 js/lodash
 js/requirejs
+js/pure
 /nbproject/private/
 nbproject
 js/Rudibieller.min.js

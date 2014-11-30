@@ -61,7 +61,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'Deploy project.', function() {
       grunt.log.write('Since this is a JS playground, let\s do a JS build!').ok();
       grunt.task.run('clean');
-      grunt.task.run('copyJs');
+//      grunt.task.run('copyJs');
       grunt.task.run('cssmin');
       grunt.task.run('copyCss');
       grunt.task.run('htmlmin');
