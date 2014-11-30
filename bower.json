@@ -1,11 +1,11 @@
 {
-  "name": "rudi-bieller-knockout",
+  "name": "rudi-bieller-spielplatz",
   "version": "0.0.1",
   "homepage": "https://github.com/invalidargument/rudiknockout",
   "authors": [
     "invalidargument <verstaerker@gmx.net>"
   ],
-  "description": "Rudi Bieller mit Knockout",
+  "description": "Rudi Bieller Spielplatz",
   "main": "css/main.css",
   "moduleType": [
     "amd"
@@ -17,8 +17,6 @@
     "js/tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.1.1",
-    "knockout": "~3.1.0",
     "requirejs": "~2.1.11",
     "lodash": "~2.4.1",
     "pure": "~0.5.0"
