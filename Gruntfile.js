@@ -99,9 +99,9 @@ module.exports = function(grunt) {
   });
   
   grunt.registerTask('copyCss', 'Copy all relevant CSS files.', function() {
-      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
+//      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
       grunt.file.mkdir(buildDir + 'css');
-      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
+//      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
       grunt.log.ok();
   });
 };
