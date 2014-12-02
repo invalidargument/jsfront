@@ -38,6 +38,19 @@ h2 {
     font-weight:lighter;
 }
 
+.linklist span {
+    padding:0 4px;
+    white-space:nowrap;
+}
+
+@media only screen 
+and (max-width : 786px) 
+and (orientation : portrait) {
+    .linklist span {
+        display:block;
+    }
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 .content-wrapper {
@@ -48,4 +61,15 @@ footer {
     width: 100%;
     bottom: 0;
     height: 75px;  /* This value is the height of your footer */
+}
+
+@media only screen 
+and (max-height : 360px) {
+    .content-wrapper {
+        padding:20px 0 10px 0;
+        margin-top:0;
+    }
+    h2 {
+        padding:0;
+    }
 }
