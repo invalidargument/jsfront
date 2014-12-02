@@ -1,7 +1,7 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: #BCBCBC;
   text-decoration:underline;
 }
 a:hover {
@@ -54,4 +54,10 @@ body {
 
 span.error {
     display:none;
+}
+
+h2 {
+    margin-top:0;
+    padding:48px 0 0 0;
+    font-weight:lighter;
 }
