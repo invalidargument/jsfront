@@ -1,4 +1,4 @@
 #jsfront
-##Ein JS-Spielplatz, sonst nichts.
+##Ein Spielplatz, sonst nichts.
 - bower install
 - ./deployment/build.sh --env=live
