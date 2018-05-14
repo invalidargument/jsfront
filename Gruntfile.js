@@ -29,6 +29,14 @@ module.exports = function(grunt) {
                     from: '{{jsname}}',
                     to: replacements.jsModuleName
                 }]
+            },
+            DatenschutzHtml: {
+                src: ['datenschutz_template.html'],
+                dest: 'datenschutz.html',
+                replacements: [{
+                    from: '{{jsname}}',
+                    to: replacements.jsModuleName
+                }]
             }
         },
         /* css shrinking with grunt-cssshrink */
@@ -48,7 +56,8 @@ module.exports = function(grunt) {
                     minifyJS: true
                 },
                 files: {
-                    'build/index.html': 'index.html' /* src : dest */
+                    'build/index.html': 'index.html', /* src : dest */
+                    'build/datenschutz.html': 'datenschutz.html' /* src : dest */
                 }
             },
         }
@@ -61,7 +70,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'Deploy project.', function() {
       grunt.log.write('Since this is a JS playground, let\s do a JS build!').ok();
       grunt.task.run('clean');
-//      grunt.task.run('copyJs');
+      grunt.task.run('copyJs');
       grunt.task.run('cssmin');
       grunt.task.run('copyCss');
       grunt.task.run('htmlmin');
@@ -81,27 +90,37 @@ module.exports = function(grunt) {
   grunt.registerTask('copyJs', 'Copy all relevant JS files.', function() {
       var sourceDir = 'js/';
       var targetDir = buildDir + 'js/';
-      
-      grunt.file.copy(sourceDir + 'jquery/dist/jquery.min.js', sourceDir + 'lib/jquery.js');
-      grunt.file.copy(sourceDir + 'knockout/dist/knockout.js', sourceDir + 'lib/knockout.js');
-      grunt.file.copy(sourceDir + 'lodash/dist/lodash.min.js', sourceDir + 'lib/lodash.js');
-      grunt.file.copy(sourceDir + 'requirejs/require.js', sourceDir + 'lib/require.js');
-      grunt.file.copy(sourceDir + 'bootstrap/dist/js/bootstrap.min.js', sourceDir + 'lib/bootstrap.js');
-      
-      grunt.file.mkdir(targetDir + 'lib');
-      grunt.file.copy(sourceDir + 'Rudibieller.min.js', targetDir + 'Rudibieller.js');
-      
-      grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
-          var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */
-          grunt.file.copy(path, targetDir + 'lib/' + filename);
-      });
+
+      grunt.file.mkdir(targetDir);
+
+      grunt.file.copy(sourceDir + 'cookieconsent2/build/cookieconsent.min.js', targetDir + 'cookieconsent2/build/cookieconsent.min.js');
+
+      // grunt.file.copy(sourceDir + 'jquery/dist/jquery.min.js', sourceDir + 'lib/jquery.js');
+      // grunt.file.copy(sourceDir + 'knockout/dist/knockout.js', sourceDir + 'lib/knockout.js');
+      // grunt.file.copy(sourceDir + 'lodash/dist/lodash.min.js', sourceDir + 'lib/lodash.js');
+      // grunt.file.copy(sourceDir + 'requirejs/require.js', sourceDir + 'lib/require.js');
+      // grunt.file.copy(sourceDir + 'bootstrap/dist/js/bootstrap.min.js', sourceDir + 'lib/bootstrap.js');
+      //
+      // grunt.file.mkdir(targetDir + 'lib');
+      // grunt.file.copy(sourceDir + 'Rudibieller.min.js', targetDir + 'Rudibieller.js');
+      //
+      // grunt.file.expand({}, [sourceDir + 'lib/*']).forEach(function(path) {
+      //     var filename = path.split(sourceDir + 'lib/')[1]; /* BOOO! */
+      //     grunt.file.copy(path, targetDir + 'lib/' + filename);
+      // });
       grunt.log.ok();
   });
   
   grunt.registerTask('copyCss', 'Copy all relevant CSS files.', function() {
+      var targetDir = buildDir + 'css/';
+
+      grunt.file.mkdir(targetDir);
+
 //      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', 'css/bootstrap.css');
-      grunt.file.mkdir(buildDir + 'css');
 //      grunt.file.copy('js/bootstrap/dist/css/bootstrap.min.css', buildDir + '/css/bootstrap.css');
+
+      grunt.file.copy('js/cookieconsent2/build/cookieconsent.min.css', targetDir + 'cookieconsent2/build/cookieconsent.min.css');
+
       grunt.log.ok();
   });
 };

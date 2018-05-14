@@ -1,11 +1,11 @@
 {
-  "name": "rudi-bieller-spielplatz",
+  "name": "invalidargument-jsfront",
   "version": "0.0.1",
-  "homepage": "https://github.com/invalidargument/rudiknockout",
+  "homepage": "https://github.com/invalidargument/jsfront",
   "authors": [
     "invalidargument <verstaerker@gmx.net>"
   ],
-  "description": "Rudi Bieller Spielplatz",
+  "description": "Ein Spielplatz - deprecated",
   "main": "css/main.css",
   "moduleType": [
     "amd"
@@ -14,11 +14,14 @@
   "private": true,
   "ignore": [
     "**/.*",
-    "js/tests"
+    "js/tests",
+    "node_modules",
+    "bower_components"
   ],
   "dependencies": {
     "requirejs": "~2.1.11",
     "lodash": "~2.4.1",
-    "pure": "~0.5.0"
+    "pure": "~0.5.0",
+    "cookieconsent2": "~3.0.6"
   }
 }
